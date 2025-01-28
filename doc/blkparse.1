@@ -435,10 +435,41 @@ Split
 
 .SH "RWBS DESCRIPTION"
 
-This is a small string containing at least one character ('R' for read, 'W'
-for write, or 'D' for block discard operation), and optionally either
-a 'B' (for barrier operations) or 'S' (for synchronous operations).
+This is a small string containing characters in the following order:
 
+.IP F
+Flush
+
+.IP R
+Read
+
+.IP W
+Write
+
+.IP D
+Discard
+
+.IP B
+Barrier
+
+.IP N
+Other operation
+
+.IP F
+Force Unit Access (FUA)
+
+.IP A
+Readahead
+
+.IP S
+Synchronous
+
+.IP M
+Meta
+
+.PP
+One of 'R', 'W', 'D', or 'N' is always present. The other characters are
+optional. Note that 'F' has two meanings, depending on its position.
 
 .SH "DEFAULT OUTPUT"
 

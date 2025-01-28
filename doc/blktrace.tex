@@ -653,9 +653,24 @@ X & Split \\ \hline
 \end{tabular}
 
 \subsubsection{\label{sec:act-table}RWBS Description}
-This is a small string containing at least one character ('R' for read,
-'W' for write, or 'D' for block discard operation), and optionally either
-a 'B' (for barrier operations) or 'S' (for synchronous operations).
+This is a small string containing characters in the following order:
+
+\begin{tabular}{|l|l|}\hline
+Character & Description \\ \hline\hline
+F & Flush \\ \hline
+R & Read \\ \hline
+W & Write \\ \hline
+D & Discard \\ \hline
+B & Barrier \\ \hline
+N & Other operation \\ \hline
+F & Force Unit Access (FUA) \\ \hline
+A & Readahead \\ \hline
+S & Synchronous \\ \hline
+M & Meta \\ \hline
+\end{tabular}
+
+One of 'R', 'W', 'D', or 'N' is always present. The other characters are
+optional. Note that 'F' has two meanings, depending on its position.
 
 \subsubsection{\label{sec:default-output}Default output}
 
