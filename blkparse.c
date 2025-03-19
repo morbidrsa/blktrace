@@ -1022,7 +1022,7 @@ static struct io_track *find_track(struct per_dev_info *pdi, pid_t pid,
 	if (!iot) {
 		struct io_track_req *req;
 
-		req = malloc(sizeof(*req) + sizeof(*iot));
+		req = calloc(1, sizeof(*req) + sizeof(*iot));
 		req->ppm = find_ppm(pid);
 		if (!req->ppm)
 			req->ppm = add_ppm_hash(pid, "unknown");
@@ -1106,7 +1106,7 @@ static void log_track_split(struct per_dev_info *pdi, struct blk_io_trace *t)
 	 * parts.
 	 */
 	iot = find_track(pdi, t->pid, t->sector);
-	split = malloc(sizeof(*iot));
+	split = calloc(1, sizeof(*iot));
 	split->req = iot->req;
 	split->next = iot->next;
 	iot->next = split;
