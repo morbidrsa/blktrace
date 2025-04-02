@@ -299,7 +299,7 @@ static int per_device_and_cpu_stats = 1;
 static int track_ios;
 static int ppi_hash_by_pid = 1;
 static int verbose;
-static unsigned int act_mask = -1U;
+static unsigned long long act_mask = -1U;
 static int stats_printed;
 static int bin_output_msgs = 1;
 int data_is_native = -1;
@@ -1612,7 +1612,7 @@ static void dump_trace_pc(struct blk_io_trace *t, struct per_dev_info *pdi,
 			  struct per_cpu_info *pci)
 {
 	int w = (t->action & BLK_TC_ACT(BLK_TC_WRITE)) != 0;
-	int act = (t->action & 0xffff) & ~__BLK_TA_CGROUP;
+	int act = (t->action & 0xffffffff) & ~__BLK_TA_CGROUP;
 
 	switch (act) {
 		case __BLK_TA_QUEUE:
@@ -1661,7 +1661,7 @@ static void dump_trace_fs(struct blk_io_trace *t, struct per_dev_info *pdi,
 			  struct per_cpu_info *pci)
 {
 	int w = (t->action & BLK_TC_ACT(BLK_TC_WRITE)) != 0;
-	int act = (t->action & 0xffff) & ~__BLK_TA_CGROUP;
+	int act = (t->action & 0xffffffff) & ~__BLK_TA_CGROUP;
 
 	switch (act) {
 		case __BLK_TA_QUEUE:
@@ -1737,7 +1737,7 @@ static void dump_trace_fs(struct blk_io_trace *t, struct per_dev_info *pdi,
 			/* dump to binary file only */
 			break;
 		default:
-			fprintf(stderr, "Bad fs action %x\n", t->action);
+			fprintf(stderr, "Bad fs action %llx\n", t->action);
 			break;
 	}
 }

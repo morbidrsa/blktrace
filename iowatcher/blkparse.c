@@ -50,7 +50,7 @@ extern int plot_io_action;
 extern int io_per_process;
 
 #define BLK_DATADIR(a) (((a) >> BLK_TC_SHIFT) & (BLK_TC_READ | BLK_TC_WRITE))
-#define BLK_TA_MASK (((1 << BLK_TC_SHIFT) - 1) & ~__BLK_TA_CGROUP)
+#define BLK_TA_MASK (((1ull << BLK_TC_SHIFT) - 1) & ~__BLK_TA_CGROUP)
 
 struct pending_io {
 	/* sector offset of this IO */
