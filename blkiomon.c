@@ -116,7 +116,7 @@ static void dump_bit(struct trace *t, const char *descr)
 	fprintf(debug.fp, "time     %16ld\n", (unsigned long)bit->time);
 	fprintf(debug.fp, "sector   %16ld\n", (unsigned long)bit->sector);
 	fprintf(debug.fp, "bytes    %16d\n", bit->bytes);
-	fprintf(debug.fp, "action   %16x\n", bit->action);
+	fprintf(debug.fp, "action   %16llx\n", bit->action);
 	fprintf(debug.fp, "pid      %16d\n", bit->pid);
 	fprintf(debug.fp, "device   %16d\n", bit->device);
 	fprintf(debug.fp, "cpu      %16d\n", bit->cpu);
@@ -143,7 +143,7 @@ static void dump_bits(struct trace *t1, struct trace *t2, const char *descr)
 	fprintf(debug.fp, "sector   %16ld %16ld\n",
 		(unsigned long)bit1->sector, (unsigned long)bit2->sector);
 	fprintf(debug.fp, "bytes    %16d %16d\n", bit1->bytes, bit2->bytes);
-	fprintf(debug.fp, "action   %16x %16x\n", bit1->action, bit2->action);
+	fprintf(debug.fp, "action   %16llx %16llx\n", bit1->action, bit2->action);
 	fprintf(debug.fp, "pid      %16d %16d\n", bit1->pid, bit2->pid);
 	fprintf(debug.fp, "device   %16d %16d\n", bit1->device, bit2->device);
 	fprintf(debug.fp, "cpu      %16d %16d\n", bit1->cpu, bit2->cpu);
