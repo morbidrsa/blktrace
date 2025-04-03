@@ -23,8 +23,13 @@ enum {
 	BLK_TC_DISCARD	= 1 << 13,	/* discard requests */
 	BLK_TC_DRV_DATA	= 1 << 14,	/* binary driver data */
 	BLK_TC_FUA	= 1 << 15,	/* fua requests */
+	BLK_TC_ZONE_APPEND = 1 << 16,   /* zone append */
+	BLK_TC_ZONE_RESET  = 1 << 17,   /* zone reset */
+	BLK_TC_ZONE_FINISH = 1 << 18,   /* zone finish */
+	BLK_TC_ZONE_OPEN   = 1 << 19,   /* zone open */
+	BLK_TC_ZONE_CLOSE  = 1 << 20,	/* zone close */
 
-	BLK_TC_END	= 1 << 15,	/* we've run out of bits! */
+	BLK_TC_END	= BLK_TC_ZONE_CLOSE,
 };
 
 #define BLK_TC_SHIFT		(32)
