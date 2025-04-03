@@ -51,6 +51,9 @@ static struct trace_info traces[] = {
 	TRACE_TO_STRING( BLK_TC_META ),
 	TRACE_TO_STRING( BLK_TC_DISCARD ),
 	TRACE_TO_STRING( BLK_TC_FUA ),
+	TRACE_TO_STRING( BLK_TC_ZONE_APPEND ),
+	TRACE_TO_STRING( BLK_TC_ZONE_RESET ),
+	TRACE_TO_STRING( BLK_TC_ZONE_FINISH ),
 };
 #define N_TRACES (sizeof(traces) / sizeof(struct trace_info))
 

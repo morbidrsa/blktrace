@@ -59,6 +59,9 @@ static inline void fill_rwbs(char *rwbs, struct blk_io_trace *t)
 	int d = t->action & BLK_TC_ACT(BLK_TC_DISCARD);
 	int f = t->action & BLK_TC_ACT(BLK_TC_FLUSH);
 	int u = t->action & BLK_TC_ACT(BLK_TC_FUA);
+	int za = t->action & BLK_TC_ACT(BLK_TC_ZONE_APPEND);
+	int zr = t->action & BLK_TC_ACT(BLK_TC_ZONE_RESET);
+	int zf = t->action & BLK_TC_ACT(BLK_TC_ZONE_FINISH);
 	int i = 0;
 
 	if (f)
@@ -70,6 +73,18 @@ static inline void fill_rwbs(char *rwbs, struct blk_io_trace *t)
 		rwbs[i++] = 'W';
 	else if (t->bytes)
 		rwbs[i++] = 'R';
+	else if (za) {
+		rwbs[i++] = 'Z';
+		rwbs[i++] = 'A';
+	}
+	else if (zr) {
+		rwbs[i++] = 'Z';
+		rwbs[i++] = 'R';
+	}
+	else if (zf) {
+		rwbs[i++] = 'Z';
+		rwbs[i++] = 'F';
+	}
 	else
 		rwbs[i++] = 'N';
 
