@@ -1711,6 +1711,13 @@ static void dump_trace_fs(struct blk_io_trace *t, struct per_dev_info *pdi,
 			account_c(t, pci, w, t->bytes);
 			log_complete(pdi, pci, t, "C");
 			break;
+		case __BLK_TA_ZONE_APPEND:
+			if (pdi->cur_depth[w])
+				pdi->cur_depth[w]--;
+			fixup_complete(pdi, t);
+			account_c(t, pci, w, t->bytes);
+			log_complete(pdi, pci, t, "ZC");
+			break;
 		case __BLK_TA_PLUG:
 			log_action(pci, t, "P");
 			break;

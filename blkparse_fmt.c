@@ -322,6 +322,37 @@ static char *parse_field(char *act, struct per_cpu_info *pci,
 	return p;
 }
 
+static void process_zoned(char *act, struct blk_io_trace *t,
+			  unsigned long long elapsed, char *name)
+{
+	switch (act[1]) {
+	case 'C':	/* Zone Append */
+		if (elapsed != -1ULL) {
+			if (t_sec(t))
+				fprintf(ofp, "%llu + %u (%8llu) [%d]\n",
+					(unsigned long long) t->sector,
+					t_sec(t), elapsed, t->error);
+			else
+				fprintf(ofp, "%llu (%8llu) [%d]\n",
+					(unsigned long long) t->sector,
+					elapsed, t->error);
+		} else {
+			if (t_sec(t))
+				fprintf(ofp, "%llu + %u [%d]\n",
+					(unsigned long long) t->sector,
+					t_sec(t), t->error);
+			else
+				fprintf(ofp, "%llu [%d]\n",
+					(unsigned long long) t->sector,
+					t->error);
+		}
+		break;
+	default:
+		fprintf(stderr, "Unknown zoned action %c\n", act[1]);
+		break;
+	}
+}
+
 static void process_default(char *act, struct per_cpu_info *pci,
 			    struct blk_io_trace *t, unsigned long long elapsed,
 			    int pdu_len, unsigned char *pdu_buf)
@@ -450,6 +481,9 @@ static void process_default(char *act, struct per_cpu_info *pci,
 		fprintf(ofp, "%*s\n", pdu_len, pdu_buf);
 		break;
 
+	case 'Z':
+		process_zoned(act, t, elapsed, name);
+		break;
 	default:
 		fprintf(stderr, "Unknown action %c\n", act[0]);
 		break;

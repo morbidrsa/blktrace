@@ -81,7 +81,8 @@ static struct act_info acts[] = {
 	ACT_TO_STRING( __BLK_TA_INSERT ),
 	ACT_TO_STRING( __BLK_TA_SPLIT ),
 	ACT_TO_STRING( __BLK_TA_BOUNCE ),
-	ACT_TO_STRING( __BLK_TA_REMAP )
+	ACT_TO_STRING( __BLK_TA_REMAP ),
+	ACT_TO_STRING( __BLK_TA_ZONE_APPEND )
 };
 #define N_ACTS (sizeof(acts) / sizeof(struct act_info))
 
