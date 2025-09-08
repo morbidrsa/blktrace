@@ -1651,6 +1651,9 @@ static void dump_trace_pc(struct blk_io_trace2 *t, struct per_dev_info *pdi,
 		case __BLK_TA_INSERT:
 			log_pc(pci, t, "I");
 			break;
+		case __BLK_TA_ZONE_MGMT:
+			log_action(pci, t, "ZM");
+			break;
 		default:
 			fprintf(stderr, "Bad pc action %x\n", act);
 			break;
@@ -1728,6 +1731,9 @@ static void dump_trace_fs(struct blk_io_trace2 *t, struct per_dev_info *pdi,
 		case __BLK_TA_ZONE_UNPLUG:
 			account_unplug(t, pci, 0);
 			log_unplug(pci, t, "ZU");
+			break;
+		case __BLK_TA_ZONE_MGMT:
+			log_action(pci, t, "ZM");
 			break;
 		case __BLK_TA_SPLIT:
 			log_track_split(pdi, t);
