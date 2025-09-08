@@ -331,6 +331,27 @@ static void process_zoned(char *act, struct blk_io_trace2 *t,
 			  unsigned long long elapsed, char *name)
 {
 	switch (act[1]) {
+	case 'A':	/* Zone Append */
+		if (elapsed != -1ULL) {
+			if (t_sec(t))
+				fprintf(ofp, "%llu + %u (%8llu) [%d]\n",
+					(unsigned long long) t->sector,
+					t_sec(t), elapsed, t->error);
+			else
+				fprintf(ofp, "%llu (%8llu) [%d]\n",
+					(unsigned long long) t->sector,
+					elapsed, t->error);
+		} else {
+			if (t_sec(t))
+				fprintf(ofp, "%llu + %u [%d]\n",
+					(unsigned long long) t->sector,
+					t_sec(t), t->error);
+			else
+				fprintf(ofp, "%llu [%d]\n",
+					(unsigned long long) t->sector,
+					t->error);
+		}
+		break;
 	case 'P': /* Zone Plug */
 		fprintf(ofp, "[%s]\n", name);
 		break;
